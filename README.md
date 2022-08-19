@@ -1,4 +1,4 @@
-# Gallery of Art Loader
+# National Gallery of Art Open Data Loader
 
 ![Demo image](media/demo-image.png)
 
