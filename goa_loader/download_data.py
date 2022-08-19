@@ -33,7 +33,10 @@ def download(base_dir=None):
     def download(thumb):
         ending = "_".join(thumb.split("/")[-5:])
         out = f"{image_path}/{ending}"
-        wget.download(thumb, out=out)
+        try:
+            wget.download(thumb, out=out)
+        except:
+            print(f"failed to get {thumb}")
 
     results = Parallel(n_jobs=16)(delayed(download)(thumb) for thumb in tqdm.tqdm(df.iiifthumburl.unique()))
     print("Done downloading images")
