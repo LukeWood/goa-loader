@@ -1,4 +1,5 @@
 data/annotations/published_images.csv
+goa_loader/__pycache__
 __pycache__/
 data/images/*
 gallery_of_art_loader.egg-info
