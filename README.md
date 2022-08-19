@@ -1,6 +1,8 @@
 # Gallery of Art Loader
 
-`goa_loader.load()` loads a dataset of images from the 
+![Demo image](media/demo-image.png)
+
+`goa_loader.load()` loads a dataset of images from the
 [National Gallery of Art Open Data Program](https://github.com/NationalGalleryOfArt/opendata)
 into a `tf.data.Dataset`.
 This dataset may be used for anything; from generative modeling to style transfer.
