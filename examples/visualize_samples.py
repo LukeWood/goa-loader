@@ -14,4 +14,5 @@ def gallery_show(images):
 dataset = goa_loader.load()
 dataset = dataset.batch(9)
 
-gallery_show(next(iter(dataset)))
+for batch in dataset.take(10):
+    gallery_show(batch)

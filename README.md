@@ -26,8 +26,16 @@ cd goa-loader
 python setup.py develop
 ```
 
+Then you can load the dataset with:
+
 ```python
 dataset = goa_loader.load()
+```
+
+To make sure your installation works, try out:
+
+```
+python examples/visualize_samples.py
 ```
 
 ## Citation
