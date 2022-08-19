@@ -10,6 +10,8 @@ Check out _Quickstart_ or `examples/` to see how you can get started.
 
 ## National Gallery of Art Open Data Program
 
+[The National Gallery of Art Open Data Program has an official Github repo](https://github.com/NationalGalleryOfArt/opendata)
+
 The [National Gallery of Art](https://www.nga.gov) serves the United States by welcoming all people to explore and experience art, creativity, and our shared humanity. In pursuing our mission, we are making certain data about our collection available to scholars, educators, and the general public in CSV format to support research, teaching, and personal enrichment; to promote interdisciplinary research; to encourage fun and creativity; and to help people understand the inspiration behind great works of art. We hope that access to this dataset will fuel knowledge, scholarship, and innovation, inspiring uses that transform the way we discover and understand the world of art.
 
 To the extent permitted by law, the National Gallery of Art waives any copyright or related rights that it might have in this dataset and is releasing this dataset under the [Creative Commons Zero](https://creativecommons.org/publicdomain/zero/1.0/) designation.
