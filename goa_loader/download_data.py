@@ -7,6 +7,7 @@ from goa_loader.path import goa_loader_root
 import wget
 import pandas as pd
 import tqdm
+from joblib import Parallel, delayed
 
 csv_remote_path = "https://raw.githubusercontent.com/NationalGalleryOfArt/opendata/main/data/published_images.csv"
 
@@ -26,8 +27,16 @@ def download(base_dir=None):
 
     image_path=f"{goa_loader_root}/data/images"
     print(f"Found {df.iiifthumburl.nunique()} images.")
-    for thumb in tqdm.tqdm(df.iiifthumburl.unique()):
-        wget.download(thumb, out=f"{image_path}/{thumb}")
+
+    print("Downloading images...")
+
+    def download(thumb):
+        ending = "_".join(thumb.split("/")[-5:])
+        out = f"{image_path}/{ending}"
+        wget.download(thumb, out=out)
+
+    results = Parallel(n_jobs=16)(delayed(download)(thumb) for thumb in tqdm.tqdm(df.iiifthumburl.unique()))
+    print("Done downloading images")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="download gallery of art data")
