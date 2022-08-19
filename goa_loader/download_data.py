@@ -4,6 +4,8 @@ import zipfile
 import requests
 import os
 from goa_loader.path import goa_loader_root
+import goa_loader.util as util_lib
+
 import wget
 import pandas as pd
 import tqdm
@@ -25,14 +27,12 @@ def download(base_dir=None):
     print(f"Reading annotations from {csv_file}")
     df = pd.read_csv(csv_file)
 
-    image_path=f"{goa_loader_root}/data/images"
     print(f"Found {df.iiifthumburl.nunique()} images.")
 
     print("Downloading images...")
 
     def download(thumb):
-        ending = "_".join(thumb.split("/")[-5:])
-        out = f"{image_path}/{ending}"
+        out = util_lib.thumbnail_to_local(base_paths, thumb)
         try:
             wget.download(thumb, out=out)
         except:

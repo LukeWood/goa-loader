@@ -7,23 +7,36 @@ import cv2
 import numpy as np
 import pandas as pd
 import tensorflow as tf
-from keras_cv import bounding_box
-from tqdm.auto import tqdm
-
 import goa_loader.download_data as download_lib
 from goa_loader.path import goa_loader_root
+import goa_loader.util as util_lib
 
-
-def load(base_dir=None, download=True):
-    base_dir = data_dir or goa_loader_root
+def load(base_dir=None, download=True, force_download=False, image_size=(200, 200)):
+    base_dir = base_dir or goa_loader_root
     base_dir = os.path.abspath(base_dir)
     csv_file = f"{goa_loader_root}/data/annotations/published_images.csv"
 
-    if not os.path.exists(csv_file):
-        download_lib.download(base_dir=data_dir)
-    ds, ds_info = load_scisrs_dataset(
-        data_path, csv_path, bounding_box_format=bounding_box_format
-    )
-    if batch_size is not None:
-        ds = ds.apply(tf.data.experimental.dense_to_ragged_batch(batch_size=batch_size))
-    return ds, ds_info
+
+    if force_download:
+        download_lib.download(base_dir=base_dir)
+    elif not os.path.exists(csv_file):
+        if download:
+            download_lib.download(base_dir=data_dir)
+        else:
+            raise ValueError(
+                f"csv_file not found, {csv_file}. "
+                "Try running `goa_loader.load(download=True)."
+            )
+
+    df = pd.read_csv(csv_file)
+    df['local_path'] = df.apply(lambda row: util_lib.thumbnail_to_local(base_dir, row.iiifthumburl), axis=1)
+    ds = tf.data.Dataset.from_tensor_slices(df['local_path'])
+
+    resize = tf.keras.layers.Resizing(image_size[0], image_size[1])
+    def process_image(path):
+        img = tf.io.read_file(path)
+        img = tf.io.decode_jpeg(img, channels=3)
+        return resize(img)
+
+    ds = ds.map(process_image, num_parallel_calls=tf.data.AUTOTUNE)
+    return ds
