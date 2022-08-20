@@ -10,7 +10,7 @@ def gallery_show(images):
         plt.subplot(3, 3, i + 1)
         plt.imshow(image.astype("uint8"))
         plt.axis("off")
-    plt.tight_layout()
+    plt.tight_layout(pad=0)
     plt.subplots_adjust(wspace=0, hspace=0)
     plt.show()
 

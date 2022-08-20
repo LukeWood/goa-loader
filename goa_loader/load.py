@@ -16,14 +16,16 @@ def load(base_dir=None, download=True, image_size=(200, 200)):
     base_dir = os.path.abspath(base_dir)
     csv_file = f"{goa_loader_root}/data/annotations/published_images.csv"
 
-    if download:
-        download_lib.download(base_dir=data_dir)
-
+    if force_download:
+        download_lib.download(base_dir=base_dir)
     if not os.path.exists(csv_file):
-        raise ValueError(
-            f"csv_file not found, {csv_file}. "
-            "Try running `goa_loader.load(download=True)."
-        )
+        if download:
+            download_lib.download(base_dir=base_dir)
+        else:
+            raise ValueError(
+                f"csv_file not found, {csv_file}. "
+                "Try running `goa_loader.load(download=True)."
+            )
 
     df = pd.read_csv(csv_file)
     df['local_path'] = df.apply(lambda row: util_lib.thumbnail_to_local(base_dir, row.iiifthumburl), axis=1)

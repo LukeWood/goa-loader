@@ -1,12 +1,11 @@
 import argparse
 import zipfile
 
-import requests
 import os
 from goa_loader.path import goa_loader_root
 import goa_loader.util as util_lib
 
-import wget
+import urllib.request
 import pandas as pd
 import tqdm
 from joblib import Parallel, delayed
@@ -35,9 +34,10 @@ def download(base_dir=None):
         out = util_lib.thumbnail_to_local(base_dir, thumb)
         if os.path.exists(out):
             return
-
         try:
-            wget.download(thumb, out=out)
+            with urllib.request.urlopen(url, timeout=10) as response, open(file_name, 'wb') as out_file:
+                data = response.read() # a `bytes` object
+                out_file.write(data)
         except:
             print(f"failed to get {thumb}")
 
