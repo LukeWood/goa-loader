@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 def gallery_show(images):
     images = images.numpy()
     images = images.astype(int)
-    plt.figure(figsize=(8,8))
+    plt.figure(figsize=(4,4))
     for i in range(9):
         image = images[i]
         plt.subplot(3, 3, i + 1)
