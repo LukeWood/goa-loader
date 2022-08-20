@@ -29,7 +29,7 @@ setup(
     author_email="lukewoodcs@gmail.com",
     url="",
     license="Apache License 2.0",
-    install_requires=["requests", "wget"],
+    install_requires=["requests", "wget", "keras-cv"],
     extras_require={
         "dev": [
             "flake8",
