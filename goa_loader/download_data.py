@@ -32,7 +32,10 @@ def download(base_dir=None):
     print("Downloading images...")
 
     def download(thumb):
-        out = util_lib.thumbnail_to_local(base_paths, thumb)
+        out = util_lib.thumbnail_to_local(base_dir, thumb)
+        if os.path.exists(out):
+            return
+
         try:
             wget.download(thumb, out=out)
         except:
@@ -41,7 +44,7 @@ def download(base_dir=None):
     results = Parallel(n_jobs=16)(delayed(download)(thumb) for thumb in tqdm.tqdm(df.iiifthumburl.unique()))
     print("Done downloading images")
 
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser(description="download gallery of art data")
     parser.add_argument("--base_dir", "-b", default="./")
 
@@ -51,3 +54,6 @@ if __name__ == "__main__":
         quit()
 
     download(base_dir=args.base_dir)
+
+if __name__ == "__main__":
+    main()

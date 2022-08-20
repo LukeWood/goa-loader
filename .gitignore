@@ -4,3 +4,4 @@ __pycache__/
 data/images/*
 gallery_of_art_loader.egg-info
 
+goa_loader/__pycache__/load.cpython-39.pyc
