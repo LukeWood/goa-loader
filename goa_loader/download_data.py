@@ -34,11 +34,14 @@ def download(base_dir=None):
         out = util_lib.thumbnail_to_local(base_dir, thumb)
         if os.path.exists(out):
             return
+
         try:
-            with urllib.request.urlopen(url, timeout=10) as response, open(file_name, 'wb') as out_file:
-                data = response.read() # a `bytes` object
-                out_file.write(data)
-        except:
+            with urllib.request.urlopen(thumb, timeout=10) as response:
+                with open(out, 'wb') as out_file:
+                    data = response.read() # a `bytes` object
+                    out_file.write(data)
+        except RuntimeError as e:
+            print(e)
             print(f"failed to get {thumb}")
 
     results = Parallel(n_jobs=16)(delayed(download)(thumb) for thumb in tqdm.tqdm(df.iiifthumburl.unique()))
