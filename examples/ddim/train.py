@@ -17,7 +17,8 @@ flags.DEFINE_string("artifacts_dir", None, "artifact save dir")
 flags.DEFINE_string(
     "checkpoint_path", "checkpoints/diffusion_model", "model checkpoint directory"
 )
-flags.DEFINE_integer("percent", 100, "percentage of dataset to use")
+flags.DEFINE_float("percent", 100, "percentage of dataset to use")
+flags.DEFINE_integer("epochs", 100, "epochs to train for")
 FLAGS = flags.FLAGS
 FLAGS(sys.argv)
 
@@ -82,7 +83,7 @@ model.normalizer.adapt(train_dataset)
 # run training and plot generated images periodically
 model.fit(
     train_dataset,
-    epochs=50,
+    epochs=FLAGS.epochs,
     # validation_data=val_dataset,
     callbacks=[
         visualiation_lib.SaveVisualOfSameNoiseEveryEpoch(

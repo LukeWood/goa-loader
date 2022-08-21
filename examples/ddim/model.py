@@ -104,7 +104,7 @@ class DiffusionModel(keras.Model):
 
         return pred_images
 
-    def generate_from_noise(self, initial_noise, diffusion_steps):
+    def generate_from_noise(self, initial_noise, diffusion_steps=20):
         # noise -> images -> denormalized images
         generated_images = self.reverse_diffusion(initial_noise, diffusion_steps)
         generated_images = self.denormalize(generated_images)
