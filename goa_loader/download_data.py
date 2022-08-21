@@ -49,7 +49,7 @@ def download(base_dir=None, percent=100):
 
         try:
             get_file(thumb, out=out)
-        except RuntimeError as e:
+        except Exception as e:
             print(e)
             print(f"failed to get {thumb}")
 
