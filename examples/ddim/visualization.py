@@ -21,6 +21,8 @@ class SaveVisualOfSameNoiseEveryEpoch(keras.callbacks.Callback):
         super().__init__(**kwargs)
         self.model = model
         self.save_path = save_path
+        self.rows = rows
+        self.cols = cols
         self.initial_noise = model.produce_initial_noise(rows * cols)
 
     def on_epoch_end(self, epoch, logs=None):
@@ -33,6 +35,8 @@ class SaveRandomNoiseImages(keras.callbacks.Callback):
         super().__init__(**kwargs)
         self.model = model
         self.save_path = save_path
+        self.rows = rows
+        self.cols = cols
 
     def on_epoch_end(self, epoch, logs=None):
         images = self.model.generate(self.rows * self.cols)
