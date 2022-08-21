@@ -34,13 +34,14 @@ class DiffusionModel(keras.Model):
     def compile(self, **kwargs):
         super().compile(**kwargs)
 
+        self.total_loss_tracker = keras.metrics.Mean(name="loss")
         self.noise_loss_tracker = keras.metrics.Mean(name="n_loss")
         self.image_loss_tracker = keras.metrics.Mean(name="i_loss")
         self.kid = KID(name="kid", image_size=self.image_size)
 
     @property
     def metrics(self):
-        return [self.noise_loss_tracker, self.image_loss_tracker, self.kid]
+        return [self.total_loss_tracker, self.noise_loss_tracker, self.image_loss_tracker, self.kid]
 
     def denormalize(self, images):
         # convert the pixel values back to 0-1 range
@@ -148,12 +149,14 @@ class DiffusionModel(keras.Model):
         gradients = tape.gradient(noise_loss, self.network.trainable_weights)
         self.optimizer.apply_gradients(zip(gradients, self.network.trainable_weights))
 
+        self.total_loss_tracker.update_state(noise_loss + image_loss)
         self.noise_loss_tracker.update_state(noise_loss)
         self.image_loss_tracker.update_state(image_loss)
 
         # track the exponential moving averages of weights
         for weight, ema_weight in zip(self.network.weights, self.ema_network.weights):
             ema_weight.assign(ema * ema_weight + (1 - ema) * weight)
+
 
         # KID is not measured during the training phase for computational efficiency
         return {m.name: m.result() for m in self.metrics[:-1]}
@@ -182,6 +185,7 @@ class DiffusionModel(keras.Model):
         noise_loss = self.loss(noises, pred_noises)
         image_loss = self.loss(images, pred_images)
 
+        self.total_loss_tracker.update_state(noise_loss + image_loss)
         self.image_loss_tracker.update_state(image_loss)
         self.noise_loss_tracker.update_state(noise_loss)
 
