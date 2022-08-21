@@ -30,7 +30,7 @@ setup(
     author_email="lukewoodcs@gmail.com",
     url="https://github.com/lukewood/goa-loader",
     license="Apache License 2.0",
-    install_requires=["joblib", "pandas", "tqdm", "tensorflow", "keras-cv"],
+    install_requires=["termcolor", "joblib", "pandas", "tqdm", "tensorflow", "keras-cv"],
     extras_require={
         "dev": [
             "flake8",

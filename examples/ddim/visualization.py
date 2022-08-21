@@ -1,6 +1,7 @@
+import os
+
 import matplotlib.pyplot as plt
 from tensorflow import keras
-import os
 
 
 def ensure_exists(path):
