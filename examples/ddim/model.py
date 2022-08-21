@@ -4,7 +4,7 @@ from keras import layers
 
 embedding_dims = 32
 embedding_max_frequency = 1000.0
-
+import math
 
 class DiffusionModel(keras.Model):
     def __init__(self, image_size, widths, block_depth, **kwargs):
