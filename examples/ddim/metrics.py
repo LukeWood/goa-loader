@@ -3,7 +3,7 @@ from tensorflow import keras
 
 
 class KID(keras.metrics.Metric):
-    def __init__(self, name, **kwargs):
+    def __init__(self, name, image_size, **kwargs):
         super().__init__(name=name, **kwargs)
 
         # KID is estimated per batch and is averaged across batches

@@ -5,6 +5,7 @@ from keras import layers
 embedding_dims = 32
 embedding_max_frequency = 1000.0
 import math
+from metrics import KID
 
 class DiffusionModel(keras.Model):
     def __init__(self, image_size, widths, block_depth, **kwargs):
@@ -19,7 +20,7 @@ class DiffusionModel(keras.Model):
 
         self.noise_loss_tracker = keras.metrics.Mean(name="n_loss")
         self.image_loss_tracker = keras.metrics.Mean(name="i_loss")
-        self.kid = KID(name="kid")
+        self.kid = KID(name="kid", image_size=self.image_size)
 
     @property
     def metrics(self):
