@@ -30,8 +30,9 @@ def load(base_dir=None, download=True, force_download=False, image_size=(200, 20
     df = pd.read_csv(csv_file)
     df['local_path'] = df.apply(lambda row: util_lib.thumbnail_to_local(base_dir, row.iiifthumburl), axis=1)
 
-    print(f"Loading {df.shape[0] * (percent/100)}/{df.shape[0]} images")
-    df = df.head(df.shape[0] * (percent/100))
+    samples = floor(df.shape[0] * (percent/100))
+    print(f"Loading {samples}/{df.shape[0]} images")
+    df = df.head(samples)
     ds = tf.data.Dataset.from_tensor_slices(df['local_path'])
 
     resize = tf.keras.layers.Resizing(image_size[0], image_size[1])
