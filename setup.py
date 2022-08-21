@@ -20,7 +20,7 @@ def get_version(rel_path):
 
 
 setup(
-    name="gallery-of-art-loader",
+    name="goa-loader",
     version=get_version("goa_loader/__init__.py"),
     description="",
     long_description=read("README.md"),
