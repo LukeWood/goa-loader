@@ -1,6 +1,6 @@
 import tensorflow as tf
 from tensorflow import keras
-
+from tensorflow.keras import layers
 
 class KID(keras.metrics.Metric):
     def __init__(self, name, image_size, **kwargs):
