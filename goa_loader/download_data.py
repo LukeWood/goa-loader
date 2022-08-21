@@ -22,7 +22,7 @@ def download(base_dir=None, percent=100):
     print("Downloading data...")
 
     base_dir = base_dir or get_base_dir()
-    csv_file = f"{base_dir}/data/annotations/published_images.csv"
+    csv_file = f"{base_dir}/annotations/published_images.csv"
 
     if not os.path.exists(csv_file):
         print(f"CSV not found, downloading from {csv_remote_path}")

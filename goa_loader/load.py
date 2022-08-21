@@ -14,7 +14,7 @@ import goa_loader.util as util_lib
 def load(base_dir=None, download=True, force_download=False, image_size=(200, 200), percent=100):
     base_dir = base_dir or get_base_dir()
     base_dir = os.path.abspath(base_dir)
-    csv_file = f"{goa_loader_root}/data/annotations/published_images.csv"
+    csv_file = f"{base_dir}/annotations/published_images.csv"
 
     if force_download:
         download_lib.download(base_dir=base_dir, percent=100)
