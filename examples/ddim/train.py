@@ -1,17 +1,13 @@
-import math
 import sys
 
-import goa_loader
-import matplotlib.pyplot as plt
 import tensorflow as tf
 import tensorflow_addons as tfa
-import tensorflow_datasets as tfds
+import visualization as visualiation_lib
 from absl import flags
-from keras import layers
+from model import DiffusionModel
 from tensorflow import keras
 
-import visualization as visualiation_lib
-from model import DiffusionModel
+import goa_loader
 
 flags.DEFINE_string("artifacts_dir", None, "artifact save dir")
 flags.DEFINE_string(
@@ -28,7 +24,6 @@ dataset_repetitions = 5
 num_epochs = 5  # train for at least 50 epochs for good results
 image_size = 64
 # KID = Kernel Inception Distance, see related section
-kid_diffusion_steps = 5
 plot_diffusion_steps = 20
 
 # sampling
@@ -73,7 +68,7 @@ checkpoint_path = FLAGS.checkpoint_path
 checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
     filepath=checkpoint_path,
     save_weights_only=True,
-    monitor="val_kid",
+    monitor="loss",
     mode="min",
     save_best_only=True,
 )

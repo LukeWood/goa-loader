@@ -1,12 +1,12 @@
 import argparse
 import os
 import urllib.request
-import zipfile
 from math import floor
 
 import pandas as pd
 import tqdm
-from joblib import Parallel, delayed
+from joblib import Parallel
+from joblib import delayed
 
 import goa_loader.util as util_lib
 from goa_loader.path import get_base_dir
@@ -53,7 +53,7 @@ def download(base_dir=None, percent=100):
             print(e)
             print(f"failed to get {thumb}")
 
-    results = Parallel(n_jobs=16)(
+    Parallel(n_jobs=16)(
         delayed(download)(thumb) for thumb in tqdm.tqdm(df.iiifthumburl.unique())
     )
     print("Done downloading images")
