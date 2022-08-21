@@ -1,6 +1,12 @@
 import matplotlib.pyplot as plt
 import tensorflow as tf
 from tensorflow import keras
+import os
+
+
+def ensure_exists(path):
+    if not os.path.exists(path):
+        os.path.makedirs(path)
 
 
 def visualize_and_save_images(images, path, rows=3, cols=6):
@@ -25,6 +31,7 @@ class SaveVisualOfSameNoiseEveryEpoch(keras.callbacks.Callback):
         self.rows = rows
         self.cols = cols
         self.initial_noise = model.produce_initial_noise(rows * cols)
+        ensure_exists(save_path)
 
     def on_epoch_end(self, epoch, logs=None):
         images = self.model.generate_from_noise(self.initial_noise)
@@ -38,6 +45,7 @@ class SaveRandomNoiseImages(keras.callbacks.Callback):
         self.save_path = save_path
         self.rows = rows
         self.cols = cols
+        ensure_exists(save_path)
 
     def on_epoch_end(self, epoch, logs=None):
         images = self.model.generate(self.rows * self.cols)
