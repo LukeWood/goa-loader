@@ -12,7 +12,7 @@ import sys
 import visualization as visualiation_lib
 
 flags.DEFINE_string("artifacts_dir", None, "artifact save dir")
-flags.DEFINE_string("checkpoints/diffusion_model", None, "model checkpoint directory")
+flags.DEFINE_string("checkpoint_path", "checkpoints/diffusion_model", "model checkpoint directory")
 flags.DEFINE_integer("percent", 100, "percentage of dataset to use")
 FLAGS = flags.FLAGS
 FLAGS(sys.argv)
