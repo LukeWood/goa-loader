@@ -63,7 +63,7 @@ python examples/basic/visualize_samples.py
 
 ```bibtex
 @misc{goawood2022,
-  title={a tf.data Loader for the National Gallery of Art Open Data Program},
+  title={A tf.data Loader for the National Gallery of Art Open Data Program},
   author={Wood, Luke and others},
   year={2022},
   howpublished={\url{https://github.com/lukewood/goa-loader}},
