@@ -10,6 +10,7 @@ from tensorflow import keras
 import goa_loader
 
 flags.DEFINE_string("artifacts_dir", None, "artifact save dir")
+flags.DEFINE_string("model_dir", None, "directory to save model to")
 flags.DEFINE_string(
     "checkpoint_path",
     "artifacts/checkpoint/diffusion_model",
@@ -96,3 +97,6 @@ model.fit(
         checkpoint_callback,
     ],
 )
+
+if FLAGS.model_dir:
+    model.save_weights(FLAGS.model_dir)
