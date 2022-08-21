@@ -1,6 +1,10 @@
+import math
+
 import tensorflow as tf
 from keras import layers
 from tensorflow import keras
+
+from metrics import KID
 
 embedding_dims = 32
 embedding_max_frequency = 1000.0
@@ -12,10 +16,9 @@ max_signal_rate = 0.95
 # architecture
 widths = [32, 64, 96, 128]
 block_depth = 2
-
-import math
-
-from metrics import KID
+ema = 0.999
+learning_rate = 1e-3
+weight_decay = 1e-4
 
 
 class DiffusionModel(keras.Model):

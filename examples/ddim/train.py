@@ -1,20 +1,22 @@
 import math
 import sys
 
+import goa_loader
 import matplotlib.pyplot as plt
 import tensorflow as tf
 import tensorflow_addons as tfa
 import tensorflow_datasets as tfds
-import visualization as visualiation_lib
 from absl import flags
 from keras import layers
-from model import DiffusionModel
 from tensorflow import keras
 
-import goa_loader
+import visualization as visualiation_lib
+from model import DiffusionModel
 
 flags.DEFINE_string("artifacts_dir", None, "artifact save dir")
-flags.DEFINE_string("checkpoint_path", "checkpoints/diffusion_model", "model checkpoint directory")
+flags.DEFINE_string(
+    "checkpoint_path", "checkpoints/diffusion_model", "model checkpoint directory"
+)
 flags.DEFINE_integer("percent", 100, "percentage of dataset to use")
 FLAGS = flags.FLAGS
 FLAGS(sys.argv)
