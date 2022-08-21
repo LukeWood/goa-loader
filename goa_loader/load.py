@@ -38,14 +38,20 @@ def load(
     )
 
     original_images = df.shape[0]
-    indices = df.apply(lambda row: os.path.exists(row['local_path']), axis=1)
+    indices = df.apply(lambda row: os.path.exists(row["local_path"]), axis=1)
     df = df[indices]
     new_images = df.shape[0]
 
     if new_images != original_images:
-        print(colored('Warning!  `goa_loader.load() detected missing images.`', 'red', attrs=['bold']))
+        print(
+            colored(
+                "Warning!  `goa_loader.load() detected missing images.`",
+                "red",
+                attrs=["bold"],
+            )
+        )
         print(f"\`goa_loader.load()` only found {new_images}/{original_images} images.")
-        print(colored('To fix:', 'yellow', attrs=['bold']))
+        print(colored("To fix:", "yellow", attrs=["bold"]))
         print(
             "\tPass `force_download=True` to `goa_loader.load()` to attempt to "
             "re-download.  Alternatively, you can manually run: "
