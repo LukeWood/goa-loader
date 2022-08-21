@@ -12,7 +12,7 @@ def visualize_and_save_images(images, path, rows=3, cols=6):
             plt.imshow(images[index])
             plt.axis("off")
     plt.tight_layout()
-    plt.savefig(path=path)
+    plt.savefig(fname=path)
     plt.close()
 
 
