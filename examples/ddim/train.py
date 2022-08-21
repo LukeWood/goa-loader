@@ -11,7 +11,7 @@ import goa_loader
 
 flags.DEFINE_string("artifacts_dir", None, "artifact save dir")
 flags.DEFINE_string(
-    "checkpoint_path", "checkpoints/diffusion_model", "model checkpoint directory"
+    "checkpoint_path", "artifacts/checkpoint/diffusion_model", "model checkpoint directory"
 )
 flags.DEFINE_float("percent", 100, "percentage of dataset to use")
 flags.DEFINE_integer("epochs", 100, "epochs to train for")
