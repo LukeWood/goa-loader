@@ -18,10 +18,10 @@ def load(base_dir=None, download=True, force_download=False, image_size=(200, 20
     csv_file = f"{base_dir}/annotations/published_images.csv"
 
     if force_download:
-        download_lib.download(base_dir=base_dir, percent=100)
+        download_lib.download(base_dir=base_dir, percent=percent)
     if not os.path.exists(csv_file):
         if download:
-            download_lib.download(base_dir=base_dir, percent=100)
+            download_lib.download(base_dir=base_dir, percent=percent)
         else:
             raise ValueError(
                 f"csv_file not found, {csv_file}. "

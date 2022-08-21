@@ -1,4 +1,5 @@
 data/annotations/published_images.csv
+goa_loader/__pycache__/path.cpython-39.pyc
 goa_loader.egg-infot/
 goa_loader/__pycache__
 __pycache__/
@@ -7,3 +8,4 @@ gallery_of_art_loader.egg-info
 
 goa_loader/__pycache__/load.cpython-39.pyc
 goa_loader.egg-info/
+goa_loader/__pycache__/

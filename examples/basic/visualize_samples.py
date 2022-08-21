@@ -1,10 +1,11 @@
 import goa_loader
 import matplotlib.pyplot as plt
 
+
 def gallery_show(images):
     images = images.numpy()
     images = images.astype(int)
-    plt.figure(figsize=(4,4))
+    plt.figure(figsize=(4, 4))
     for i in range(9):
         image = images[i]
         plt.subplot(3, 3, i + 1)
@@ -13,6 +14,7 @@ def gallery_show(images):
     plt.tight_layout(pad=0)
     plt.subplots_adjust(wspace=0, hspace=0)
     plt.show()
+
 
 dataset = goa_loader.load()
 dataset = dataset.batch(9)
