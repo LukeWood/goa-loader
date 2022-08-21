@@ -3,10 +3,10 @@ import sys
 import tensorflow as tf
 import tensorflow_addons as tfa
 import visualization as visualiation_lib
+from absl import app
 from absl import flags
 from model import DiffusionModel
 from tensorflow import keras
-from absl import app
 
 import goa_loader
 
