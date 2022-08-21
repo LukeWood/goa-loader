@@ -62,7 +62,7 @@ python examples/basic/visualize_samples.py
 # Citation
 
 ```bibtex
-@misc{goaloaderwood2022,
+@misc{goawood2022,
   title={a tf.data Loader for the National Gallery of Art Open Data Program},
   author={Wood, Luke and others},
   year={2022},
