@@ -12,6 +12,7 @@ import sys
 import visualization as visualiation_lib
 
 flags.DEFINE_string("artifacts_dir", None, "artifact save dir")
+flags.DEFINE_string("checkpoints/diffusion_model", None, "model checkpoint directory")
 flags.DEFINE_integer("percent", 100, "percentage of dataset to use")
 FLAGS = flags.FLAGS
 FLAGS(sys.argv)
@@ -22,7 +23,6 @@ dataset_repetitions = 5
 num_epochs = 5  # train for at least 50 epochs for good results
 image_size = 64
 # KID = Kernel Inception Distance, see related section
-kid_image_size = 75
 kid_diffusion_steps = 5
 plot_diffusion_steps = 20
 
@@ -63,7 +63,7 @@ model.compile(
 )
 
 # save the best model based on the validation KID metric
-checkpoint_path = "checkpoints/diffusion_model"
+checkpoint_path = FLAGS.checkpoint_path
 checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
     filepath=checkpoint_path,
     save_weights_only=True,
@@ -87,7 +87,6 @@ model.fit(
         visualiation_lib.SaveRandomNoiseImages(
             model=model, save_path=f"{artifacts_dir}/random"
         ),
-        keras.callbacks.LambdaCallback(on_epoch_end=model.plot_images),
         checkpoint_callback,
     ],
 )

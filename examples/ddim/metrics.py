@@ -2,6 +2,9 @@ import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
 
+kid_image_size = 75
+
+
 class KID(keras.metrics.Metric):
     def __init__(self, name, image_size, **kwargs):
         super().__init__(name=name, **kwargs)

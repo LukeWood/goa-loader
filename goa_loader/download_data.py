@@ -13,11 +13,13 @@ from math import floor
 
 csv_remote_path = "https://raw.githubusercontent.com/NationalGalleryOfArt/opendata/main/data/published_images.csv"
 
+
 def get_file(remote_url, out, timeout_seconds=10):
     with urllib.request.urlopen(remote_url, timeout=timeout_seconds) as response:
-        with open(out, 'wb') as out_file:
-            data = response.read() # a `bytes` object
+        with open(out, "wb") as out_file:
+            data = response.read()  # a `bytes` object
             out_file.write(data)
+
 
 def download(base_dir=None, percent=100):
     print("Downloading data...")
@@ -33,7 +35,7 @@ def download(base_dir=None, percent=100):
     print(f"Reading annotations from {csv_file}")
     df = pd.read_csv(csv_file)
 
-    samples = floor(df.shape[0] * (percent/100))
+    samples = floor(df.shape[0] * (percent / 100))
     print(f"Found {df.iiifthumburl.nunique()} images.")
     print(f"Downloading {samples}/{df.shape[0]} images")
 
@@ -51,8 +53,11 @@ def download(base_dir=None, percent=100):
             print(e)
             print(f"failed to get {thumb}")
 
-    results = Parallel(n_jobs=16)(delayed(download)(thumb) for thumb in tqdm.tqdm(df.iiifthumburl.unique()))
+    results = Parallel(n_jobs=16)(
+        delayed(download)(thumb) for thumb in tqdm.tqdm(df.iiifthumburl.unique())
+    )
     print("Done downloading images")
+
 
 def main():
     parser = argparse.ArgumentParser(description="download gallery of art data")
@@ -64,6 +69,7 @@ def main():
         quit()
 
     download(base_dir=args.base_dir)
+
 
 if __name__ == "__main__":
     main()

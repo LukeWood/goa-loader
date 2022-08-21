@@ -107,6 +107,7 @@ class DiffusionModel(keras.Model):
     def train_step(self, images):
         # normalize images to have standard deviation of 1, like the noises
         images = self.normalizer(images, training=True)
+        batch_size = tf.shape(images)[0]
         noises = tf.random.normal(
             shape=(batch_size, self.image_size, self.image_size, 3)
         )
