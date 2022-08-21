@@ -1,6 +1,7 @@
 import os
 
-from setuptools import find_packages, setup
+from setuptools import find_packages
+from setuptools import setup
 
 
 def read(rel_path):
@@ -27,20 +28,17 @@ setup(
     long_description_content_type="text/markdown",
     author="Luke Wood",
     author_email="lukewoodcs@gmail.com",
-    url="",
+    url="https://github.com/lukewood/goa-loader",
     license="Apache License 2.0",
-    install_requires=["requests", "wget", "keras-cv"],
+    install_requires=["joblib", "pandas", "tqdm", "tensorflow", "keras-cv"],
     extras_require={
         "dev": [
             "flake8",
-            "mypy",
             "pytest",
             "pytype",
             "setuptools",
             "twine",
-            "types-tabulate",
             "wheel",
-            "yapf",
         ],
     },
     classifiers=[

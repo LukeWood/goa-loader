@@ -2,9 +2,8 @@ import math
 
 import tensorflow as tf
 from keras import layers
-from tensorflow import keras
-
 from metrics import KID
+from tensorflow import keras
 
 embedding_dims = 32
 embedding_max_frequency = 1000.0
@@ -22,12 +21,15 @@ weight_decay = 1e-4
 
 
 class DiffusionModel(keras.Model):
-    def __init__(self, image_size, widths, block_depth, **kwargs):
+    def __init__(
+        self, image_size, widths, block_depth, kid_diffusion_steps=5, **kwargs
+    ):
         super().__init__(**kwargs)
         self.image_size = image_size
         self.normalizer = layers.Normalization()
         self.network = get_network(image_size, widths, block_depth)
         self.ema_network = keras.models.clone_model(self.network)
+        self.kid_diffusion_steps = kid_diffusion_steps
 
     def compile(self, **kwargs):
         super().compile(**kwargs)
@@ -159,6 +161,7 @@ class DiffusionModel(keras.Model):
     def test_step(self, images):
         # normalize images to have standard deviation of 1, like the noises
         images = self.normalizer(images, training=False)
+        batch_size = tf.shape(images)[0]
         noises = tf.random.normal(
             shape=(batch_size, self.image_size, self.image_size, 3)
         )
@@ -186,7 +189,7 @@ class DiffusionModel(keras.Model):
         # this is computationally demanding, kid_diffusion_steps has to be small
         images = self.denormalize(images)
         generated_images = self.generate(
-            num_images=batch_size, diffusion_steps=kid_diffusion_steps
+            num_images=batch_size, diffusion_steps=self.kid_diffusion_steps
         )
         self.kid.update_state(images, generated_images)
 

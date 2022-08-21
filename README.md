@@ -1,4 +1,4 @@
-# goa_loader:
+# goa\_loader
 
 __a tf.data Loader for the National Gallery of Art Open Data Program__
 
