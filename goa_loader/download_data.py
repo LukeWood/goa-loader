@@ -31,10 +31,11 @@ def download(base_dir=None, percent=100):
 
     print(f"Reading annotations from {csv_file}")
     df = pd.read_csv(csv_file)
-    df = df.head(df.shape[0] * (percent/100))
 
     print(f"Found {df.iiifthumburl.nunique()} images.")
+    print(f"Downloading {df.shape[0] * (percent/100)}/{df.shape[0]} images")
 
+    df = df.head(df.shape[0] * (percent/100))
     print("Downloading images...")
 
     def download(thumb):
