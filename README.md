@@ -1,4 +1,4 @@
-# National Gallery of Art Open Data Program
+# National Gallery of Art Open Data Program `tf.data.Dataset` Loader
 
 __a tf.data Loader for the National Gallery of Art Open Data Program__
 
