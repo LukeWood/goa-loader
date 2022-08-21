@@ -11,11 +11,15 @@ import goa_loader
 
 flags.DEFINE_string("artifacts_dir", None, "artifact save dir")
 flags.DEFINE_string(
-    "checkpoint_path", "artifacts/checkpoint/diffusion_model", "model checkpoint directory"
+    "checkpoint_path",
+    "artifacts/checkpoint/diffusion_model",
+    "model checkpoint directory",
 )
 flags.DEFINE_float("percent", 100, "percentage of dataset to use")
 flags.DEFINE_integer("epochs", 100, "epochs to train for")
-flags.DEFINE_boolean("force_download", False, "Whether or not to force download the dataset.")
+flags.DEFINE_boolean(
+    "force_download", False, "Whether or not to force download the dataset."
+)
 FLAGS = flags.FLAGS
 FLAGS(sys.argv)
 
@@ -46,7 +50,9 @@ def preprocess_image(image):
 
 
 # load dataset
-train_dataset = goa_loader.load(image_size=(64, 64), percent=FLAGS.percent, force_download=FLAGS.force_download)
+train_dataset = goa_loader.load(
+    image_size=(64, 64), percent=FLAGS.percent, force_download=FLAGS.force_download
+)
 train_dataset = train_dataset.cache()
 train_dataset = train_dataset.map(preprocess_image, num_parallel_calls=tf.data.AUTOTUNE)
 train_dataset = train_dataset.shuffle(10 * batch_size)
