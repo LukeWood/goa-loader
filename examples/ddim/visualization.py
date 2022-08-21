@@ -13,7 +13,7 @@ def visualize_and_save_images(images, path, rows=3, cols=6):
             plt.axis("off")
     plt.tight_layout()
     plt.subplots_adjust(wspace=0, hspace=0)
-    plt.savefig(fname=path, pad_inches=0))
+    plt.savefig(fname=path, pad_inches=0)
     plt.close()
 
 
