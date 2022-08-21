@@ -2,7 +2,7 @@ import argparse
 import zipfile
 
 import os
-from goa_loader.path import goa_loader_root
+from goa_loader.path import get_base_dir
 import goa_loader.util as util_lib
 
 import urllib.request
@@ -21,8 +21,8 @@ def get_file(remote_url, out, timeout_seconds=10):
 def download(base_dir=None, percent=100):
     print("Downloading data...")
 
-    base_dir = base_dir or goa_loader_root
-    csv_file = f"{goa_loader_root}/data/annotations/published_images.csv"
+    base_dir = base_dir or get_base_dir()
+    csv_file = f"{base_dir}/data/annotations/published_images.csv"
 
     if not os.path.exists(csv_file):
         print(f"CSV not found, downloading from {csv_remote_path}")
