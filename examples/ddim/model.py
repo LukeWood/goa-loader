@@ -1,11 +1,22 @@
 import tensorflow as tf
-from tensorflow import keras
 from keras import layers
+from tensorflow import keras
 
 embedding_dims = 32
 embedding_max_frequency = 1000.0
+
+# sampling
+min_signal_rate = 0.02
+max_signal_rate = 0.95
+
+# architecture
+widths = [32, 64, 96, 128]
+block_depth = 2
+
 import math
+
 from metrics import KID
+
 
 class DiffusionModel(keras.Model):
     def __init__(self, image_size, widths, block_depth, **kwargs):

@@ -1,15 +1,17 @@
 import math
+import sys
+
 import matplotlib.pyplot as plt
 import tensorflow as tf
-import tensorflow_datasets as tfds
 import tensorflow_addons as tfa
-from tensorflow import keras
-from keras import layers
-import goa_loader
-from model import DiffusionModel
-from absl import flags
-import sys
+import tensorflow_datasets as tfds
 import visualization as visualiation_lib
+from absl import flags
+from keras import layers
+from model import DiffusionModel
+from tensorflow import keras
+
+import goa_loader
 
 flags.DEFINE_string("artifacts_dir", None, "artifact save dir")
 flags.DEFINE_string("checkpoint_path", "checkpoints/diffusion_model", "model checkpoint directory")

@@ -1,16 +1,17 @@
 import json
 import os
 import random
+from math import floor
 from pathlib import Path
 
 import cv2
 import numpy as np
 import pandas as pd
 import tensorflow as tf
+
 import goa_loader.download_data as download_lib
-from goa_loader.path import get_base_dir
 import goa_loader.util as util_lib
-from math import floor
+from goa_loader.path import get_base_dir
 
 
 def load(

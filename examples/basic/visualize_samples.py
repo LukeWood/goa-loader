@@ -1,5 +1,6 @@
-import goa_loader
 import matplotlib.pyplot as plt
+
+import goa_loader
 
 
 def gallery_show(images):

@@ -1,15 +1,15 @@
 import argparse
-import zipfile
-
 import os
-from goa_loader.path import get_base_dir
-import goa_loader.util as util_lib
-
 import urllib.request
+import zipfile
+from math import floor
+
 import pandas as pd
 import tqdm
 from joblib import Parallel, delayed
-from math import floor
+
+import goa_loader.util as util_lib
+from goa_loader.path import get_base_dir
 
 csv_remote_path = "https://raw.githubusercontent.com/NationalGalleryOfArt/opendata/main/data/published_images.csv"
 
