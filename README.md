@@ -2,7 +2,7 @@
 
 __a tf.data Loader for the National Gallery of Art Open Data Program__
 
-![Demo image](media/demo-image.png)
+![Demo image](examples/ddim/media/learning.gif)
 
 __... and Generative Modeling to Accompany!__
 
