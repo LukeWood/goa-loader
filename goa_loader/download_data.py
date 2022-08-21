@@ -12,7 +12,13 @@ from joblib import Parallel, delayed
 
 csv_remote_path = "https://raw.githubusercontent.com/NationalGalleryOfArt/opendata/main/data/published_images.csv"
 
-def download(base_dir=None):
+def get_file(remote_url, out, timeout_seconds=10):
+    with urllib.request.urlopen(remote_url, timeout=timeout_seconds) as response:
+        with open(out, 'wb') as out_file:
+            data = response.read() # a `bytes` object
+            out_file.write(data)
+
+def download(base_dir=None, percent=100):
     print("Downloading data...")
 
     base_dir = base_dir or goa_loader_root
@@ -20,7 +26,7 @@ def download(base_dir=None):
 
     if not os.path.exists(csv_file):
         print(f"CSV not found, downloading from {csv_remote_path}")
-        wget.download(csv_remote_path, out=csv_file)
+        get_file(csv_remote_path, out=csv_file, timeout=100)
         print("Download successful")
 
     print(f"Reading annotations from {csv_file}")
@@ -36,10 +42,7 @@ def download(base_dir=None):
             return
 
         try:
-            with urllib.request.urlopen(thumb, timeout=10) as response:
-                with open(out, 'wb') as out_file:
-                    data = response.read() # a `bytes` object
-                    out_file.write(data)
+            get_file(thumb, out=out)
         except RuntimeError as e:
             print(e)
             print(f"failed to get {thumb}")

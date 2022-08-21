@@ -11,16 +11,16 @@ import goa_loader.download_data as download_lib
 from goa_loader.path import goa_loader_root
 import goa_loader.util as util_lib
 
-def load(base_dir=None, download=True, force_download=False, image_size=(200, 200)):
+def load(base_dir=None, download=True, force_download=False, image_size=(200, 200), percent=100):
     base_dir = base_dir or goa_loader_root
     base_dir = os.path.abspath(base_dir)
     csv_file = f"{goa_loader_root}/data/annotations/published_images.csv"
 
     if force_download:
-        download_lib.download(base_dir=base_dir)
+        download_lib.download(base_dir=base_dir, percent=100)
     if not os.path.exists(csv_file):
         if download:
-            download_lib.download(base_dir=base_dir)
+            download_lib.download(base_dir=base_dir, percent=100)
         else:
             raise ValueError(
                 f"csv_file not found, {csv_file}. "
@@ -29,6 +29,8 @@ def load(base_dir=None, download=True, force_download=False, image_size=(200, 20
 
     df = pd.read_csv(csv_file)
     df['local_path'] = df.apply(lambda row: util_lib.thumbnail_to_local(base_dir, row.iiifthumburl), axis=1)
+
+    df = df.head(df.shape[0] * (percent/100))
     ds = tf.data.Dataset.from_tensor_slices(df['local_path'])
 
     resize = tf.keras.layers.Resizing(image_size[0], image_size[1])
