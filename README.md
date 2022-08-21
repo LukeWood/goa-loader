@@ -1,6 +1,6 @@
 # National Gallery of Art Open Data Program `tf.data.Dataset` Loader
 
-__a tf.data Loader for the National Gallery of Art Open Data Program__
+__a tf.data Loader for the [National Gallery of Art Open Data Program](https://github.com/NationalGalleryOfArt/opendata)__
 
 ![Demo image](examples/ddim/media/learning.gif)
 
