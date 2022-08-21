@@ -26,7 +26,7 @@ def download(base_dir=None, percent=100):
 
     if not os.path.exists(csv_file):
         print(f"CSV not found, downloading from {csv_remote_path}")
-        get_file(csv_remote_path, out=csv_file, timeout=100)
+        get_file(csv_remote_path, out=csv_file, timeout_seconds=100)
         print("Download successful")
 
     print(f"Reading annotations from {csv_file}")
