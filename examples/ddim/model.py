@@ -116,7 +116,7 @@ class DiffusionModel(keras.Model):
     def generate(self, num_images, diffusion_steps=20):
         # noise -> images -> denormalized images
         initial_noise = self.produce_initial_noise(num_images)
-        return generate_from_noise(initial_noise, diffusion_steps)
+        return self.generate_from_noise(initial_noise, diffusion_steps)
 
     def train_step(self, images):
         # normalize images to have standard deviation of 1, like the noises
