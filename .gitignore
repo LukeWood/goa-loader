@@ -1,4 +1,5 @@
 data/annotations/published_images.csv
+build/
 dist
 build
 goa_loader/__pycache__/path.cpython-39.pyc

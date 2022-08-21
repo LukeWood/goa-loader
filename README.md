@@ -1,4 +1,4 @@
-# goa\_loader
+# National Gallery of Art Open Data Program `tf.data.Dataset` Loader
 
 __a tf.data Loader for the National Gallery of Art Open Data Program__
 
@@ -33,14 +33,13 @@ To the extent permitted by law, the National Gallery of Art waives any copyright
 
 The dataset provides data records relating to the 130,000+ artworks in our collection and the artists who created them.  You can download the dataset free of charge without seeking authorization from the National Gallery of Art.  
 
+
 # Quickstart
 
 Getting started with the `goa_loader` loader is as easy as:
 
 ```bash
-git clone https://github.com/lukewood/goa-loader
-cd goa-loader
-python setup.py develop
+pip install goa-loader
 ```
 
 Then you can load the dataset with:
@@ -52,7 +51,7 @@ dataset = goa_loader.load()
 To make sure your installation works, try out:
 
 ```
-python examples/visualize_samples.py
+python examples/basic/visualize_samples.py
 ```
 
 # Examples
@@ -60,11 +59,11 @@ python examples/visualize_samples.py
 - [Basic Loading and Visualization](examples/basic)
 - [Denoising Diffusion Implicit Model](examples/ddim)
 
-## Citation
+# Citation
 
 ```bibtex
-@misc{goaloaderwood2022,
-  title={a tf.data Loader for the National Gallery of Art Open Data Program},
+@misc{goawood2022,
+  title={A tf.data Loader for the National Gallery of Art Open Data Program},
   author={Wood, Luke and others},
   year={2022},
   howpublished={\url{https://github.com/lukewood/goa-loader}},
