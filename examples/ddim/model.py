@@ -113,7 +113,7 @@ class DiffusionModel(keras.Model):
     def produce_initial_noise(self, num_images):
         return tf.random.normal(shape=(num_images, self.image_size, self.image_size, 3))
 
-    def generate(self, num_images, diffusion_steps):
+    def generate(self, num_images, diffusion_steps=20):
         # noise -> images -> denormalized images
         initial_noise = produce_initial_noise(num_images)
         return generate_from_noise(initial_noise, diffusion_steps)
