@@ -3,6 +3,7 @@ from math import floor
 
 import pandas as pd
 import tensorflow as tf
+from termcolor import colored
 
 import goa_loader.download_data as download_lib
 import goa_loader.util as util_lib
@@ -35,6 +36,21 @@ def load(
     df["local_path"] = df.apply(
         lambda row: util_lib.thumbnail_to_local(base_dir, row.iiifthumburl), axis=1
     )
+
+    original_images = df.shape[0]
+    indices = df.apply(lambda row: os.path.exists(row['local_path']), axis=1)
+    df = df[indices]
+    new_images = df.shape[0]
+
+    if new_images != original_images:
+        print(colored('Warning!  `goa_loader.load() detected missing images.`', 'red', attrs=['bold']))
+        print(f"\`goa_loader.load()` only found {new_images}/{original_images} images.")
+        print(colored('To fix:', 'yellow', attrs=['bold']))
+        print(
+            "\tPass `force_download=True` to `goa_loader.load()` to attempt to "
+            "re-download.  Alternatively, you can manually run: "
+            "`goa_loader.download()`."
+        )
 
     samples = floor(df.shape[0] * (percent / 100))
     print(f"Loading {samples}/{df.shape[0]} images")
