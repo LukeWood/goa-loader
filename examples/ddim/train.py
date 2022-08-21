@@ -51,7 +51,7 @@ def preprocess_image(image):
 
 
 # load dataset
-train_dataset = goa_loader.load(image_size=(64, 64), percent=FLAGS.percent)
+train_dataset = goa_loader.load(image_size=(64, 64), percent=FLAGS.percent, force_download=True)
 train_dataset = train_dataset.cache()
 train_dataset = train_dataset.map(preprocess_image, num_parallel_calls=tf.data.AUTOTUNE)
 train_dataset = train_dataset.shuffle(10 * batch_size)
