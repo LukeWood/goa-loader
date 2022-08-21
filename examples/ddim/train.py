@@ -21,7 +21,6 @@ FLAGS(sys.argv)
 
 artifacts_dir = FLAGS.artifacts_dir or "artifacts"
 # data
-dataset_repetitions = 5
 num_epochs = 5  # train for at least 50 epochs for good results
 image_size = 64
 # KID = Kernel Inception Distance, see related section
@@ -51,7 +50,6 @@ train_dataset = goa_loader.load(image_size=(64, 64), percent=FLAGS.percent, forc
 train_dataset = train_dataset.cache()
 train_dataset = train_dataset.map(preprocess_image, num_parallel_calls=tf.data.AUTOTUNE)
 train_dataset = train_dataset.shuffle(10 * batch_size)
-train_dataset = train_dataset.repeat(dataset_repetitions)
 train_dataset = train_dataset.apply(tf.data.experimental.ignore_errors())
 train_dataset = train_dataset.batch(batch_size, drop_remainder=True)
 train_dataset = train_dataset.prefetch(buffer_size=tf.data.AUTOTUNE)
