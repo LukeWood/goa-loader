@@ -56,6 +56,7 @@ train_dataset = train_dataset.cache()
 train_dataset = train_dataset.map(preprocess_image, num_parallel_calls=tf.data.AUTOTUNE)
 train_dataset = train_dataset.shuffle(10 * batch_size)
 train_dataset = train_dataset.repeat(dataset_repetitions)
+train_dataset = train_dataset.apply(tf.data.experimental.ignore_errors())
 train_dataset = train_dataset.batch(batch_size, drop_remainder=True)
 train_dataset = train_dataset.prefetch(buffer_size=tf.data.AUTOTUNE)
 
