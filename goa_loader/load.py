@@ -10,6 +10,7 @@ import tensorflow as tf
 import goa_loader.download_data as download_lib
 from goa_loader.path import get_base_dir
 import goa_loader.util as util_lib
+from math import floor
 
 def load(base_dir=None, download=True, force_download=False, image_size=(200, 200), percent=100):
     base_dir = base_dir or get_base_dir()

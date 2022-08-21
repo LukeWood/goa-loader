@@ -9,6 +9,7 @@ import urllib.request
 import pandas as pd
 import tqdm
 from joblib import Parallel, delayed
+from math import floor
 
 csv_remote_path = "https://raw.githubusercontent.com/NationalGalleryOfArt/opendata/main/data/published_images.csv"
 
